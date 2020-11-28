@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import propTypes from 'prop-types';
+import s from './ContactForm.module.css';
 
 export default class ContactsForm extends Component {
   static propTypes = {};
@@ -13,7 +15,6 @@ export default class ContactsForm extends Component {
 
   handleChange = e => {
     const { name, value } = e.target;
-
     this.setState({ [name]: value });
   };
 
@@ -22,7 +23,6 @@ export default class ContactsForm extends Component {
     const { name, phone } = this.state;
 
     this.props.onAddContacts(name, phone);
-
     this.onClearState();
   };
 
@@ -30,7 +30,7 @@ export default class ContactsForm extends Component {
     const { name, phone } = this.state;
     return (
       <>
-        <form onSubmit={e => this.handleSubmit(e)}>
+        <form className={s.form} onSubmit={e => this.handleSubmit(e)}>
           <label id="name" htmlFor="name">
             Name
           </label>
@@ -45,13 +45,14 @@ export default class ContactsForm extends Component {
             Phone
           </label>
           <input
+            className={s.input}
             type="number"
             name="phone"
             id="phone"
             value={phone}
             onChange={e => this.handleChange(e)}
           />
-          <button type="submit" disabled={!(name, phone)}>
+          <button type="submit" disabled={!(name && phone)}>
             add contact
           </button>
         </form>
@@ -59,3 +60,7 @@ export default class ContactsForm extends Component {
     );
   }
 }
+
+ContactsForm.propTypes = {
+  onAddContacts: propTypes.func,
+};

@@ -1,7 +1,10 @@
+import propTypes from 'prop-types';
+import s from './Filter.module.css';
+
 export default function Filter({ value, onChangeFilter }) {
   return (
     <>
-      <label name="filter" htmlFor="filter" value={value}>
+      <label className={s.text} name="filter" htmlFor="filter" value={value}>
         Find contacts by name
       </label>
       <input
@@ -13,3 +16,8 @@ export default function Filter({ value, onChangeFilter }) {
     </>
   );
 }
+
+Filter.propTypes = {
+  value: propTypes.string,
+  onChangeFilter: propTypes.func,
+};
