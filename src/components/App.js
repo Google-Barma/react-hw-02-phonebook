@@ -27,16 +27,35 @@ export default class App extends Component {
     );
   };
 
+  isAdded(name) {
+    return this.state.contacts.map(contact => contact.name).includes(name);
+  }
+
   addContacts = (name, phone) => {
-    this.setState(prevState => {
-      return {
-        contacts: [
-          ...prevState.contacts,
-          { id: uuid(), name: name, phone: phone },
-        ],
-      };
-    });
+    if (this.isAdded(name)) {
+      return alert(`${name} is already in contacts`);
+    } else {
+      this.setState(prevState => {
+        return {
+          contacts: [
+            ...prevState.contacts,
+            { id: uuid(), name: name, phone: phone },
+          ],
+        };
+      });
+    }
   };
+
+  //   addContacts = (name, phone) => {
+  //     this.setState(prevState => {
+  //       return {
+  //         contacts: [
+  //           ...prevState.contacts,
+  //           { id: uuid(), name: name, phone: phone },
+  //         ],
+  //       };
+  //     });
+  //   };
 
   render() {
     const { contacts, filter } = this.state;
