@@ -27,15 +27,15 @@ export default class App extends Component {
     );
   };
 
-  isAdded = name =>
-    this.state.contacts.map(contact => contact.name).includes(name);
-
   handleDelBtn = id => {
     const contacts = this.state.contacts;
     const newContacts = contacts.filter(contact => contact.id !== id);
 
     this.setState({ contacts: newContacts });
   };
+
+  isAdded = name =>
+    this.state.contacts.map(contact => contact.name).includes(name);
 
   addContacts = (name, phone) => {
     if (this.isAdded(name)) {
