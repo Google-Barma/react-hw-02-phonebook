@@ -1,4 +1,4 @@
-export default function ContactsList({ contactsData, onChangeFilter }) {
+export default function ContactsList({ contactsData, onDeleteBtn }) {
   return (
     <>
       <ul>
@@ -7,6 +7,9 @@ export default function ContactsList({ contactsData, onChangeFilter }) {
             <p>
               {name}: <span>{phone}</span>
             </p>
+            <button type="button" onClick={e => onDeleteBtn(id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

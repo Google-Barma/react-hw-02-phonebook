@@ -27,9 +27,15 @@ export default class App extends Component {
     );
   };
 
-  isAdded(name) {
-    return this.state.contacts.map(contact => contact.name).includes(name);
-  }
+  isAdded = name =>
+    this.state.contacts.map(contact => contact.name).includes(name);
+
+  handleDelBtn = id => {
+    const contacts = this.state.contacts;
+    const newContacts = contacts.filter(contact => contact.id !== id);
+
+    this.setState({ contacts: newContacts });
+  };
 
   addContacts = (name, phone) => {
     if (this.isAdded(name)) {
@@ -46,17 +52,6 @@ export default class App extends Component {
     }
   };
 
-  //   addContacts = (name, phone) => {
-  //     this.setState(prevState => {
-  //       return {
-  //         contacts: [
-  //           ...prevState.contacts,
-  //           { id: uuid(), name: name, phone: phone },
-  //         ],
-  //       };
-  //     });
-  //   };
-
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = this.handleChangeFilter();
@@ -70,7 +65,10 @@ export default class App extends Component {
         {contacts.length ? (
           <Section title="Contacts">
             <Filter value={filter} onChangeFilter={this.changeFilter} />
-            <ContactsList contactsData={filteredContacts} />
+            <ContactsList
+              contactsData={filteredContacts}
+              onDeleteBtn={this.handleDelBtn}
+            />
           </Section>
         ) : null}
       </Layout>
