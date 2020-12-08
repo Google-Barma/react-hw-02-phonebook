@@ -46,7 +46,7 @@ export default class ContactsForm extends Component {
           </label>
           <input
             className={s.input}
-            type="number"
+            type="tel"
             name="phone"
             id="phone"
             value={phone}
